@@ -31,7 +31,6 @@ All team members contributed to research, design, testing, and coding of the Ard
 | 16x2 LCD Screen        | 1        | Displays messages to user                     |
 | NEMA 17 Stepper Motors | 4        | 2 for Y-axis, 1 X-axis, 1 Z-axis             |
 | Servo Motor            | 1        | Controls claw grip                            |
-| DC Motor               | 1        | Optional continuous rotation task             |
 | Joystick               | 1        | Controls X/Y gantry                           |
 | Buttons                | 3       | Start, coin, Z-axis control                   |
 | Limit Switches         | 3       | For X/Y/Z travel limits                       |
@@ -49,7 +48,6 @@ All motors and components were tested individually before integration:
 | Component      | Test Summary          | Observations                                      |
 |----------------|---------------------|--------------------------------------------------|
 | Servo Motor    | Potentiometer control | Smooth motion, precise positioning, limited torque |
-| DC Motor       | Limit switch control  | Continuous rotation, controlled start/stop via Arduino |
 | Stepper Motor  | Step-based control    | High torque, precise positioning, slower for continuous motion |
 | Joystick       | Analog X/Y           | Controlled gantry axes successfully             |
 | Limit Switches | Digital input        | Effectively stops motion and prevents over-travel |
