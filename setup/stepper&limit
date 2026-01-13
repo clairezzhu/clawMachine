@@ -1,0 +1,23 @@
+// Motor & Limit Switch Testing
+// Motor will run until someone presses the limit switch
+//12/10/2025
+//Claire Zhu
+
+const int motorPin = 9;           // Digital pin 9 is connected to motor
+const int limitSwitchPin = 2;  // Digital pin 2 is connected to limit switch
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  pinMode(limitSwitchPin, INPUT_PULLUP);
+  digitalWrite(motorPin, HIGH);  // Start motor
+}
+
+void loop() {
+  int switchState = digitalRead(limitSwitchPin);
+
+  if (switchState == LOW) {             // if the limit switch is pressed
+    digitalWrite(motorPin, LOW);   // Stop motor
+  } else {                                             // is the limit switch is not pressed
+    digitalWrite(motorPin, HIGH);  // Run motor
+  }
+}

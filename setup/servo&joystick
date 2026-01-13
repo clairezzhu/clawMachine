@@ -1,0 +1,21 @@
+// Servo Motor Controlled by Joystick
+// Reads joystick X-axis and maps it to servo position
+//12/08/2025
+//Claire Zhu 
+
+#include <Servo.h>
+Servo myServo;
+const int servoPin = 9;              // Servo signal wire connected to digital pin 9
+
+void setup() {
+  myServo.attach(servoPin);    // Attach servo to digital pin
+}
+
+void loop() {
+  int joystickValue = analogRead(joystickPin); 
+  // Read joystick position (0–1023)
+
+int servoAngle = map(joystickValue, 0, 1023, 0, 180); 
+  myServo.write(servoAngle);  // Move servo to mapped position
+  delay(15);                                  // Small delay for smooth movement
+}

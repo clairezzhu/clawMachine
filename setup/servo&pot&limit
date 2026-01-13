@@ -1,0 +1,39 @@
+//code for potentiometer, motor, and limit switch all together
+//12/12/2025
+//Claire Zhu 
+
+#include <Servo.h>
+Servo myservo;
+
+const int limitSwitchPin = 2;    // Limit switch connected to pin 2
+const int potPin = A1;               // Potentiometer on A1
+int potValue = 0;
+int angle = 90;                            // Starting position
+
+void setup() {
+  myservo.attach(9);
+  pinMode(limitSwitchPin, INPUT_PULLUP);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read potentiometer
+  potValue = analogRead(potPin);
+  int desiredAngle = map(potValue, 0, 1023, 0, 180);
+  
+  // Read limit switch state
+  bool limitPressed = (digitalRead(limitSwitchPin) == LOW);
+  
+  if (!limitPressed) {
+    // If the limit switch is not pressed, then the motor can move freely
+    angle = desiredAngle;
+  } else {
+    // If the limit switch pressed, motor can’t move in desired direction
+    if (desiredAngle < angle) {  // If trying to move away from limit
+      angle = desiredAngle;       
+    }
+    // If moving toward limit (desiredAngle > angle), then it’ll do nothing
+  }
+  myservo.write(angle);
+  delay(15);
+}
