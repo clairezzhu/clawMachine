@@ -5,13 +5,13 @@ This project is a durable, user-friendly claw machine specifically designed for 
 The claw machine is built around an Arduino Mega controlling multiple motors, a joystick, buttons, limit switches, and an LCD screen to deliver real-time feedback.
 
 ## Engineering Design Process
-### 1. Identify the Problem (done)
-### 2. Define Criteria & Constraints (done)
-### 3. Research & Brainstorming (done)
-### 4. Select a Solution (Decision Matrix) (done)
-### 5. Build & Prototype (in progress)
-### 6. Test & Iterate (in progress)
-### 7. Final Solution (in progress)
+1. Identify the Problem (done)
+2. Define Criteria & Constraints (done)
+3. Research & Brainstorming (done)
+4. Select a Solution (Decision Matrix) (done)
+5. Build & Prototype (in progress)
+6. Test & Iterate (in progress)
+7. Final Solution (in progress)
 
 
 **Key Features:**
