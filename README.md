@@ -59,22 +59,8 @@ All motors and components were tested individually before integration:
 **Note:** Stepper motors were selected for the X and Y axes due to their precise step-based positioning, while a servo motor was used for the claw to provide controlled angular motion for gripping objects.
 
 
-## Code Logic Outline
-![IMG_2719](https://github.com/user-attachments/assets/3f407fc1-0cc0-458e-9331-9db8f59cf8e2)
-
-
-## Code
-Full code is still in progress as shown in the `code/` folder The completed project code will be updated in the same file when done. 
-
-
-## Wiring Diagram
-All motors are driven through TIP-120 transistors, allowing the Arduino Mega to safely control higher-current loads. Shared ground connections ensure consistent logic levels across the system, while signal wiring was routed to minimize noise and interference.
-<img width="778" height="572" alt="Screenshot 2026-01-12 at 11 44 56 PM" src="https://github.com/user-attachments/assets/abc8b0a4-ee54-4a0c-adc4-84afee7b8180" />
-
-
 ## Mechanical Design
 Note: We're still finalizing the gantry plan. We're leaning towards a **Cartesian Gantry** with linear-rods. I've made a decision matrix comparing some possible ways:
-
 
 **Rating Scale:**  
 1 = Poor / Very Difficult  
@@ -115,6 +101,19 @@ Below is the CAD model of the control box:
 7. Integrate all systems and run full game test
 
 
+## Wiring Diagram
+All motors are driven through TIP-120 transistors, allowing the Arduino Mega to safely control higher-current loads. Shared ground connections ensure consistent logic levels across the system, while signal wiring was routed to minimize noise and interference.
+<img width="778" height="572" alt="Screenshot 2026-01-12 at 11 44 56 PM" src="https://github.com/user-attachments/assets/abc8b0a4-ee54-4a0c-adc4-84afee7b8180" />
+
+
+## Code Logic Outline
+![IMG_2719](https://github.com/user-attachments/assets/3f407fc1-0cc0-458e-9331-9db8f59cf8e2)
+
+
+## Code
+Full code is still in progress as shown in the `code/` folder The completed project code will be updated in the same file when done. 
+
+
 ## Technical Challenges
 **Challenge 1:**
 The machine needed to be safe for young users while remaining functional.
@@ -137,6 +136,18 @@ The Arduino Mega’s I/O pins cannot safely supply the current required by motor
 To protect the Arduino, TIP-120 transistors were used as power switches between the Arduino and the motors. The Arduino controls the transistor bases using low-current digital signals, while the transistors handle the higher motor currents from an external power supply. This design isolates the microcontroller from high-current loads, prevents overcurrent conditions, and ensures reliable operation.
 
 
+## Technical Artifacts
+This table highlights the key artifacts from our projects. Testing each component individually allowed us to catch mechanical and electrical issues early, and it reinforced the value of systematic troubleshooting in engineering. Observing how motors responded to signals helped refine our Arduino control code, ensuring smooth integration later.
+
+| Artifact                       | Design Step            | Skill Demonstrated                                        | Why Important                                                       |
+| ------------------------------ | ---------------------- | --------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Arduino Code**                | Software Integration   | C++ programming, modular functions, motor & servo control | Demonstrates embedded systems knowledge and problem-solving         |
+| **CAD Models**                  | Mechanical Design      | 3D modeling, spatial reasoning, gantry design             | Shows iterative mechanical design process                           |
+| **Wiring Diagram**              | Electrical Integration | Circuit design, TIP-120 transistors, limit switches       | Shows understanding of electrical safety and high-current handling  |
+| **Motor & Servo Calibration Logs** | Testing & Iteration    | Stepper and servo calibration, joystick mapping           | Demonstrates precision, iterative improvement, and debugging skills |
+| **Test Prints / Prototypes**    | Prototyping            | 3D printing, component fit validation                     | Shows practical hands-on engineering                                |
+| **Safety Documentation**        | Technical Challenges   | Overcurrent prevention, mechanical safety                 | Shows engineering mindset and risk mitigation                       |
+
 
 ## Skills Demonstrated
 - Embedded systems programming (Arduino/C++)
@@ -147,9 +158,11 @@ To protect the Arduino, TIP-120 transistors were used as power switches between 
 - Team collaboration and documentation
 
 
-## Potential Improvements
+## Potential Improvements / Reflection
 
 Future improvements could include adding adjustable difficulty levels or closed-loop motor control to improve positioning accuracy. Additional safety features such as emergency stop buttons could also be added.
+
+Working on the claw machine taught me how to better integrate all three mechanical, electrical, and software systems into a fully functioning product while prioritizing safety and usability for young students. Through iterative testing of motors, servos, and electronics, I learned the importance of precision, calibration, and troubleshooting. Collaborating with my teammates strengthened my communication and problem-solving skills, and designing, wiring, and programming the system deepened my hands-on technical knowledge. This project reinforced an engineering mindset of continuous improvement, careful planning, and practical application of skills learned in HPOE and DE.
 
 
 ## Team Members
