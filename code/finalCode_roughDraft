@@ -1,0 +1,167 @@
+// -----------------------------
+// Claw Machine Control Code
+// DE Capstone Project
+// -----------------------------
+
+#include <Stepper.h>
+#include <Servo.h>
+#include <LiquidCrystal.h>
+
+// -----------------------------
+// Pin Definitions
+// -----------------------------
+const int X_STEP_PIN = 2;
+const int Y_STEP_PIN = 3;
+const int Z_UP_PIN = 4;   // Z-axis up button
+const int Z_DOWN_PIN = 5; // Z-axis down button
+const int START_BTN_PIN = 6;
+const int COIN_BTN_PIN = 7;
+const int LIMIT_X_PIN = 8;
+const int LIMIT_Y_PIN = 9;
+const int LIMIT_Z_PIN = 10;
+
+const int CLAW_SERVO_PIN = 11;
+
+// -----------------------------
+// Constants
+// -----------------------------
+const int X_STEPS_PER_UNIT = 100;
+const int Y_STEPS_PER_UNIT = 100;
+const int Z_STEPS_PER_UNIT = 50;
+
+// -----------------------------
+// Objects
+// -----------------------------
+Stepper stepperX(X_STEPS_PER_UNIT, 2, 3, 4, 5); // example pins, adjust
+Stepper stepperY(Y_STEPS_PER_UNIT, 6, 7, 8, 9);
+
+Servo clawServo;
+LiquidCrystal lcd(12, 13, A0, A1, A2, A3); // RS, EN, D4-D7
+
+// -----------------------------
+// Game State Enum
+// -----------------------------
+enum GameState { IDLE, PLAYING, GAME_OVER };
+GameState gameState = IDLE;
+
+// -----------------------------
+// Setup Function
+// -----------------------------
+void setup() {
+  // Initialize pins
+  pinMode(Z_UP_PIN, INPUT_PULLUP);
+  pinMode(Z_DOWN_PIN, INPUT_PULLUP);
+  pinMode(START_BTN_PIN, INPUT_PULLUP);
+  pinMode(COIN_BTN_PIN, INPUT_PULLUP);
+  pinMode(LIMIT_X_PIN, INPUT_PULLUP);
+  pinMode(LIMIT_Y_PIN, INPUT_PULLUP);
+  pinMode(LIMIT_Z_PIN, INPUT_PULLUP);
+
+  // Attach servo
+  clawServo.attach(CLAW_SERVO_PIN);
+  clawServo.write(0); // start claw closed
+
+  // Initialize LCD
+  lcd.begin(16, 2);
+  lcd.print("INSERT COIN");
+}
+
+// -----------------------------
+// Main Loop
+// -----------------------------
+void loop() {
+  readButtons();
+
+  if (gameState == PLAYING) {
+    readJoystick();
+    moveGantry();
+    checkLimits();
+    updateLCD();
+  }
+}
+
+// -----------------------------
+// Read Joystick Function
+// -----------------------------
+int joystickX = 0;
+int joystickY = 0;
+
+void readJoystick() {
+  joystickX = analogRead(A4); // example pin
+  joystickY = analogRead(A5);
+}
+
+// -----------------------------
+// Read Buttons Function
+// -----------------------------
+void readButtons() {
+  if (digitalRead(START_BTN_PIN) == LOW) {
+    gameState = PLAYING;
+    lcd.clear();
+    lcd.print("GAME START!");
+  }
+
+  if (digitalRead(COIN_BTN_PIN) == LOW) {
+    gameState = IDLE;
+    lcd.clear();
+    lcd.print("INSERT COIN");
+  }
+
+  // Z-axis control
+  if (digitalRead(Z_UP_PIN) == LOW) {
+    moveZ(1); // move up
+  } else if (digitalRead(Z_DOWN_PIN) == LOW) {
+    moveZ(-1); // move down
+  }
+}
+
+// -----------------------------
+// Move Gantry Function
+// -----------------------------
+void moveGantry() {
+  // Example mapping: joystickX/Y to stepper steps
+  if (joystickX > 600) stepperX.step(1);
+  if (joystickX < 400) stepperX.step(-1);
+  if (joystickY > 600) stepperY.step(1);
+  if (joystickY < 400) stepperY.step(-1);
+}
+
+// -----------------------------
+// Move Z-axis Function
+// -----------------------------
+void moveZ(int direction) {
+  // placeholder: you can integrate a stepper or DC motor here
+}
+
+// -----------------------------
+// Claw Control Functions
+// -----------------------------
+void openClaw() {
+  clawServo.write(90);
+}
+
+void closeClaw() {
+  clawServo.write(0);
+}
+
+// -----------------------------
+// Check Limit Switches
+// -----------------------------
+void checkLimits() {
+  if (digitalRead(LIMIT_X_PIN) == LOW) {
+    // stop X-axis movement
+  }
+  if (digitalRead(LIMIT_Y_PIN) == LOW) {
+    // stop Y-axis movement
+  }
+  if (digitalRead(LIMIT_Z_PIN) == LOW) {
+    // stop Z-axis movement
+  }
+}
+
+// -----------------------------
+// Update LCD Display
+// -----------------------------
+void updateLCD() {
+  // Optional: show X/Y/Z coordinates or game timer
+}
