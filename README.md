@@ -4,6 +4,15 @@ This project is a durable, user-friendly claw machine specifically designed for 
 
 The claw machine is built around an Arduino Mega controlling multiple motors, a joystick, buttons, limit switches, and an LCD screen to deliver real-time feedback.
 
+## Engineering Design Process
+### 1. Identify the Problem (done)
+### 2. Define Criteria & Constraints (done)
+### 3. Research & Brainstorming (done)
+### 4. Select a Solution (Decision Matrix) (done)
+### 5. Build & Prototype (in progress)
+### 6. Test & Iterate (in progress)
+### 7. Final Solution (in progress)
+
 
 **Key Features:**
 - X/Y/Z gantry system for precise claw movement
@@ -158,11 +167,19 @@ This table highlights the key artifacts from our projects. Testing each componen
 - Team collaboration and documentation
 
 
-## Potential Improvements / Reflection
+## Potential Improvements
 
 Future improvements could include adding adjustable difficulty levels or closed-loop motor control to improve positioning accuracy. Additional safety features such as emergency stop buttons could also be added.
 
-Working on the claw machine taught me how to better integrate all three mechanical, electrical, and software systems into a fully functioning product while prioritizing safety and usability for young students. Through iterative testing of motors, servos, and electronics, I learned the importance of precision, calibration, and troubleshooting. Collaborating with my teammates strengthened my communication and problem-solving skills, and designing, wiring, and programming the system deepened my hands-on technical knowledge. This project reinforced an engineering mindset of continuous improvement, careful planning, and practical application of skills learned in HPOE and DE.
+## Reflection
+**Summary:
+**This project demonstrates my ability to integrate mechanical design, electrical systems, and embedded software into a single functional product. Through designing the claw machine, I applied skills in Arduino programming, motor control using stepper motors and servos, electrical safety through the use of TIP-120 transistors, CAD modeling, and systematic testing. The project highlights my understanding of the engineering design process and my ability to document and justify design decisions.
+
+**Reflection:
+**Working on this project so far has shown me the importance of planning, testing, and designing for safety before full construction. By testing motors, servos, limit switches, and controls individually, I learned how early verification prevents larger issues during integration. I also gained a deeper understanding of how electrical constraints, like current limits on the Arduino Mega, affect hardware decisions and require protective components. Even before full assembly, this process has strengthened my problem-solving skills and reinforced the value of iterative development.
+
+**Connection:
+**This artifact represents me as an engineer who approaches projects with a thoughtful, safety-focused mindset. It aligns with my portfolio goals by showing how I apply concepts learned in HPOE and DE to real-world engineering problems, emphasizing documentation and continuous improvement.
 
 
 ## Team Members
