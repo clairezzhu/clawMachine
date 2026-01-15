@@ -4,6 +4,7 @@ This project is a durable, user-friendly claw machine specifically designed for 
 
 The claw machine is built around an Arduino Mega controlling multiple motors, a joystick, buttons, limit switches, and an LCD screen to deliver real-time feedback.
 
+
 **Key Features:**
 - X/Y/Z gantry system for precise claw movement
 - Servo-controlled claw for gripping objects
@@ -14,13 +15,14 @@ The claw machine is built around an Arduino Mega controlling multiple motors, a 
 - Safety features using limit switches to prevent over-travel
 
 
-## Team Members
-This project was completed as a collaboration between:
-- Claire Zhu @clairezzhu (me)
-- Lena Li @lenali26
-- Nora Dunn @norad4309
-
-All team members contributed to research, design, testing, and coding of the Arduino Claw Machine.
+## User Interface
+1. LCD displays `INSERT COIN`
+2. Coin button starts the game
+3. Joystick controls X/Y movement
+4. Button lowers claw (Z-axis)
+5. Servo closes claw
+6. Claw retracts and returns to drop zone
+7. LCD displays `GAME OVER`
 
 
 ## Bill of Materials
@@ -54,15 +56,53 @@ All motors and components were tested individually before integration:
 
 *Test codes are in the `setup/` folder.*
 
+**Note:** Stepper motors were selected for the X and Y axes due to their precise step-based positioning, while a servo motor was used for the claw to provide controlled angular motion for gripping objects.
+
 
 ## Code Logic Outline
 ![IMG_2719](https://github.com/user-attachments/assets/3f407fc1-0cc0-458e-9331-9db8f59cf8e2)
 
+
 ## Code
-Full code is still in progress. The completed project code will be available in the `code/` folder when done. 
+Full code is still in progress as shown in the `code/` folder The completed project code will be updated in the same file when done. 
+
 
 ## Wiring Diagram
+All motors are driven through TIP-120 transistors, allowing the Arduino Mega to safely control higher-current loads. Shared ground connections ensure consistent logic levels across the system, while signal wiring was routed to minimize noise and interference.
 <img width="778" height="572" alt="Screenshot 2026-01-12 at 11 44 56 PM" src="https://github.com/user-attachments/assets/abc8b0a4-ee54-4a0c-adc4-84afee7b8180" />
+
+
+## Mechanical Design
+Note: We're still finalizing the gantry plan. We're leaning towards a **Cartesian Gantry** with linear-rods. I've made a decision matrix comparing some possible ways:
+
+
+**Rating Scale:**  
+1 = Poor / Very Difficult  
+5 = Excellent / Ideal  
+
+| Gantry Type | Mechanical Simplicity | Precision | Safety for Kids | Ease of Control (Code) | **Total ( /25 )** |
+|------------|----------------------|-----------|------------------|------------------------|------------------|
+| Cartesian (X/Y/Z) | 5 | 5 | 5 | 5 | **20** |
+| CoreXY | 2 | 5 | 2 | 2 | 11 |
+| H-Bot | 3 | 3 | 3 | 3 | 12 |
+| Polar (Rotational + Radial) | 3 | 3 | 2 | 3 | 11 |
+| Cable-Driven | 2 | 2 | 2 | 2 | 8 |
+| SCARA Arm | 1 | 3 | 1 | 1 | 6 |
+
+*While higher-performance systems such as CoreXY scored well in precision, their increased mechanical and software complexity made them less suitable for an educational claw machine.*
+
+
+## CAD Designs
+The claw machine enclosure and internal layout were designed in CAD to ensure proper component fit and structural stability. 
+
+Key design considerations included:
+- Adequate clearance for motors, wiring, and connectors
+- Structural support for the gantry system and moving components
+- Ventilation and access for maintenance
+
+Below is the CAD model of the control box:
+
+<img width="477" height="526" alt="Screenshot 2026-01-14 at 8 44 22 PM" src="https://github.com/user-attachments/assets/fb1ac2c8-b5d1-421b-8e05-618fc4cd677b" />
 
 
 ## Assembly Plan
@@ -73,6 +113,52 @@ Full code is still in progress. The completed project code will be available in 
 5. Verify shared ground connections and separate motor power supply
 6. Upload Arduino code and test individual subsystems
 7. Integrate all systems and run full game test
+
+
+## Technical Challenges
+**Challenge 1:**
+The machine needed to be safe for young users while remaining functional.
+
+**Solution:**
+Motor speeds were limited in software, pinch points were minimized mechanically, and the system was designed to fail safely by stopping motion when limits are triggered.
+
+
+**Challenge 2:**
+Without safeguards, motors could drive the gantry beyond physical limits, risking damage.
+
+**Solution:**
+Limit switches were installed on the X, Y, and Z axes. The code continuously monitors these switches and immediately stops or reverses motor movement when a limit is reached.
+
+
+**Challenge 3:**
+The Arduino Mega’s I/O pins cannot safely supply the current required by motors and other high-power components. Directly driving motors from the Arduino risked exceeding current limits, which could permanently damage the microcontroller or cause unstable behavior.
+
+**Solution:**
+To protect the Arduino, TIP-120 transistors were used as power switches between the Arduino and the motors. The Arduino controls the transistor bases using low-current digital signals, while the transistors handle the higher motor currents from an external power supply. This design isolates the microcontroller from high-current loads, prevents overcurrent conditions, and ensures reliable operation.
+
+
+
+## Skills Demonstrated
+- Embedded systems programming (Arduino/C++)
+- Motor control (stepper & servo)
+- Hardware & software integration
+- Electrical safety and power management
+- Mechanical design and prototyping
+- Team collaboration and documentation
+
+
+## Potential Improvements
+
+Future improvements could include adding adjustable difficulty levels or closed-loop motor control to improve positioning accuracy. Additional safety features such as emergency stop buttons could also be added.
+
+
+## Team Members
+This project was completed as a collaboration between:
+- Claire Zhu @clairezzhu (me)
+- Lena Li @lenali26
+- Nora Dunn @norad4309
+
+All team members contributed to research, design, testing, and coding of the Arduino Claw Machine.
 
 
 ## References
